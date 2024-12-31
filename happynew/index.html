@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨Let me be ur aegyo sal✨</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #003366, #336699, #99ccff) fixed;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .snowflake {
+            color: white;
+            font-size: 1.5em;
+            position: absolute;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        .countdown {
+            font-size: 2rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1>✨ Happy New Year ! 🎉🎁</h1>
+
+        <!-- Фотография -->
+        <div class="mt-4">
+            <img id="mainImage" src="./photos/kakash.jpg" alt="" class="img-thumbnail" style="cursor: pointer;">
+            <p class="mt-2">🌟 I wanna be your dishwasher 🌟</p>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="mt-4">
+            <button class="btn btn-primary" onclick="showGreeting()">-Туц-</button>
+            <button class="btn btn-success" onclick="playMusic()">-Туц-</button>
+        </div>
+        <audio id="music" src="./music/Bobby Helms - Jingle Bell Rock.mp3"></audio>
+
+        <!-- Таймер -->
+        <div class="countdown mt-4" id="countdown"></div>
+
+        <!-- Снег -->
+        <div id="snowflakes"></div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="greetingModal" tabindex="-1" aria-labelledby="greetingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="greetingModalLabel">❄Пускай все наши мечты сбываются!❄</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" сlass="">
+                    🎄Хочу помыть посуду за тебя в следующем году!🎄
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+
+        
+        // Увеличение фотографии
+        document.getElementById('mainImage').onclick = function () {
+            window.open(this.src, '_blank');
+        };
+
+        // Показываем модальное окно
+        function showGreeting() {
+            const modal = new bootstrap.Modal(document.getElementById('greetingModal'));
+            modal.show();
+        }
+
+        // Воспроизведение музыки
+        // Play/pause music
+        const music = document.getElementById('music');
+        let isPlaying = false;
+
+        function playMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+            } else {
+                music.play();
+                isPlaying = true;
+            }
+        
+        }
+
+        // Таймер до Нового Года
+        function updateCountdown() {
+            const now = new Date();
+            const nextYear = new Date(now.getFullYear() + 1, 0, 1);
+            const diff = nextYear - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = `⏳${hours} hours, ${minutes} minutes, ${seconds} seconds⏳`;
+        }
+        setInterval(updateCountdown, 1000);
+
+        // Эффект снега
+        const snowflakesContainer = document.getElementById('snowflakes');
+        for (let i = 0; i < 20; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 1 + 'em';
+            snowflake.style.top = Math.random() * 100 + 'vh';
+            snowflakesContainer.appendChild(snowflake);
+        }
+        
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
